@@ -16,17 +16,19 @@ import time
 
 #function to add an event
 def add_event(event_string):
+ s=event_string.split('-')
+ d={s[0]:s[1]}
  date=time.strftime('%x')
- a_dict={date:event_string}
  if os.path.isfile('suresh.json'):
   with open('suresh.json') as fh:
    data=json.load(fh)
-  data.update(a_dict)
+  data[date].update(d)
   with open('suresh.json','w') as fh:
    json.dump(data,fh)
   
  else:
   fh=open('suresh.json','w')
+  a_dict={date:d}
   json.dump(a_dict,fh)
  print "event added successfully!"
 
